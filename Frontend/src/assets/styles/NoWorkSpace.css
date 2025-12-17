@@ -10,29 +10,30 @@
   text-align: center;
   width: 100%;
   max-width: 450px;
-  background: #fff;
+  background: var(--cardColor);
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px var(--boxShadowColor);
 }
 
 .no-work-space-title {
   padding: 3px 0px 5px 0px;
   font-size: 22px;
   font-weight: 700;
+  color: var(--textColor);
 }
 
 .no-work-space-description {
-  color: #6c6565;
+  color: var(--primaryColor);
   font-size: 12px;
   font-weight: 500;
   padding-bottom: 15px;
 }
 
 .no-work-space-button {
-  background-color: oklch(0.55 0.25 262.87);
+  background-color: var(--textColor);
   border: none;
-  color: white;
+  color: var(--secondryColor);
   padding: 6px 8px;
   gap: 8px;
   border-radius: 5px;
