@@ -45,20 +45,22 @@ const Sidebar = ({ workspaceData, isSideBar, toggleMenuOpen }) => {
           </button>
         </div>
         <div className="sidebar-body">
-          <div
-            onClick={() => {
-              navigate("/dashboard");
-              toggleMenuOpen();
-            }}
-            className={`sidebar-item flex align-items-center justify-content-start ${
-              location.pathname.startsWith("/dashboard") ? "active" : ""
-            }`}
-          >
-            <span className="sidebar-item-icon">
-              <LayoutDashboard size={18} />
-            </span>
-            <h3 className="sidebar-item-text">Dashboard</h3>
-          </div>
+          {workspaceData?.createdBy === currentUser?._id && (
+            <div
+              onClick={() => {
+                navigate("/dashboard");
+                toggleMenuOpen();
+              }}
+              className={`sidebar-item flex align-items-center justify-content-start ${
+                location.pathname.startsWith("/dashboard") ? "active" : ""
+              }`}
+            >
+              <span className="sidebar-item-icon">
+                <LayoutDashboard size={18} />
+              </span>
+              <h3 className="sidebar-item-text">Dashboard</h3>
+            </div>
+          )}
           <div
             className={`sidebar-item flex align-items-center justify-content-start ${
               location.pathname === "/workspaces" ? "active" : ""

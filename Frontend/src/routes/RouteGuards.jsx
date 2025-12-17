@@ -34,7 +34,7 @@ export const ProtectedRoute = ({
     requireOwner &&
     workspaceData?.createdBy !== currentUser?._id
   ) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/workspaces" replace />;
   }
 
   return children;

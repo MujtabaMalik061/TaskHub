@@ -155,9 +155,9 @@ body {
 .mobile-sidebar-header > button {
   display: none;
   font-size: 0px;
-  background-color: #e1ebff;
-  color: black;
-  border: 1px solid #2166fe;
+  background-color: #5077cd1c;
+  color: var(--textColor);
+  border: 1px solid var(--textColor);
   border-radius: 4px;
 }
 
