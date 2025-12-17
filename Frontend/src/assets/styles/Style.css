@@ -1,10 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --backGroundColor: #0d1b2a;
+  --TopbarBackGroundColor: rgba(0, 0, 0, 0.12);
+  --textColor: oklch(0.55 0.25 262.87);
+  --primaryColor: #ffffff94;
+  --secondryColor: #ffffff;
+  --borderColor: #2a3b55;
+  --borderColorFocus: #3399ff55;
+  --cardColor: #1b263b;
+  --cardHoverColor: #1a2c47;
+  --cardSubTitleColor: #9aacc4;
+  --boxShadowColor: rgba(255, 255, 255, 0.05);
+  --dangerColor: #ff4d4d;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--backGroundColor);
 }
 
 .loaderWrapper {
@@ -49,10 +69,10 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #fafafa;
+  background-color: var(--backGroundColor);
   transition: all 0.3s ease-in-out;
   z-index: 1000;
-  border-right: 1px solid #dfdfdf;
+  border-right: 1px solid var(--borderColor);
 }
 
 .mobile-nav {
@@ -60,13 +80,13 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: #e1ebff;
+  background-color: var(--cardHoverColor);
   padding: 10px 20px 10px 20px;
 }
 
 .logo-container {
   height: 50px;
-  background: black;
+  background: var(--backGroundColor);
   border-radius: 10px;
   width: 50px;
   padding: 2px;
@@ -77,6 +97,10 @@
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+}
+
+.mobile-nav > svg {
+  color: var(--secondryColor);
 }
 
 .main-content {
@@ -93,6 +117,7 @@
 
 .local-header {
   padding: 30px 4px;
+  color: var(--secondryColor);
 }
 
 .local-header-title {
@@ -108,8 +133,8 @@
   font-size: 12px;
   font-weight: 500;
   border: none;
-  color: white;
-  background: #2166fe;
+  color: var(--secondryColor);
+  background: var(--textColor);
   padding: 0px 8px;
   border-radius: 6px;
   cursor: pointer;
@@ -123,7 +148,7 @@
 
 .mobile-sidebar-header {
   gap: 10px;
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid var(--borderColor);
   padding: 6px 25px 14px;
 }
 
@@ -144,6 +169,7 @@
 .sidebar-title {
   font-size: 20px;
   font-weight: 700;
+  color: var(--secondryColor);
 }
 
 .sidebar-body {
@@ -153,6 +179,7 @@
 
 .sidebar-item {
   gap: 7px;
+  color: var(--secondryColor);
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
@@ -166,8 +193,7 @@
 }
 
 .sidebar-item:hover {
-  background-color: #cdcdcd47;
-  color: #5077cd;
+  background-color: var(--cardColor);
 }
 
 .sidebar-item-icon {
@@ -181,7 +207,8 @@
 
 .sidebar-footer {
   gap: 10px;
-  border-top: 1px solid #dfdfdf;
+  color: var(--secondryColor);
+  border-top: 1px solid var(--borderColor);
   padding: 18px 25px 8px;
   cursor: pointer;
 }
@@ -239,8 +266,26 @@
   z-index: 10000;
 }
 
-
 .modal-content {
+  max-height: 90vh;
+  background: #ffffff14;
+  border-radius: 16px;
+  color: #fff;
+  width: 100%;
+  box-shadow: 0 8px 32px #0000001a;
+  backdrop-filter: saturate(-0.5) blur(0px);
+  -webkit-backdrop-filter: saturate(0.5) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden auto;
+  padding: 20px;
+  z-index: 9999;
+  max-width: 400px;
+  scrollbar-width: none;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpModel 0.35s ease forwards;
+}
+/* .modal-content {
   background-color: white;
   color: black;
   padding: 20px;
@@ -254,7 +299,7 @@
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUpModel 0.35s ease forwards;
-}
+} */
 
 @keyframes fadeInUpModel {
   from {

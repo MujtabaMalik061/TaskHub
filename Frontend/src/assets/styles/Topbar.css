@@ -5,10 +5,10 @@
   font-size: 30px;
   gap: 10px;
   padding: 12px;
-  background: #fafafa;
+  background: var(--backGroundColor);
   font-weight: 500;
   width: 100%;
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid var(--borderColor);
 }
 
 .topbar-left-side {
@@ -27,11 +27,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--cardColor);
+  color: var(--secondryColor);
   gap: 2px;
   max-width: 130px;
   font-size: 10px;
   font-weight: 600;
-  border: 1px solid #dbdbdb;
+  border: 1px solid var(--borderColor);
   padding: 5px 4px;
   border-radius: 4px;
   cursor: pointer;
@@ -46,9 +48,9 @@
 
 .workspace-dropdown {
   position: absolute;
-  background-color: white;
+  background-color: var(--cardColor);
   width: 300px;
-  box-shadow: 0px 0px 10px #00000014;
+  box-shadow: 0px 0px 10px var(--boxShadowColor);
   border-radius: 4px;
   overflow: hidden;
   top: 25px;
@@ -80,17 +82,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 8px 4px;
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid var(--borderColor);
   cursor: pointer;
 }
 
 .workspace-dropdown-item:hover {
-  background-color: #ebebeba8;
+  background-color: var(--cardHoverColor);
 }
 
 .workspace-dropdown-item-icon {
   padding: 3px 7px;
-  color: white;
+  color: var(--secondryColor);
   border-radius: 8px;
   font-size: 15px;
   margin-right: 2.5px;
@@ -106,7 +108,7 @@
 }
 
 .workspace-dropdown-create:hover {
-  background-color: #ebebeba8;
+  background-color: var(--cardHoverColor);
 }
 
 .topbar-actions {
@@ -114,20 +116,11 @@
   gap: 10px;
 }
 
-.topbar-action-btn {
-  font-size: 0px;
-  cursor: pointer;
-  background: white;
-  border: 1px solid #dfdfdf;
-  padding: 8px 8px;
-  border-radius: 8px;
-}
-
 .topbar-profile-btn {
   cursor: pointer;
   border: none;
-  background: black;
-  color: white;
+  background: var(--textColor);
+  color: var(--secondryColor);
   height: 36px;
   width: 36px;
   border-radius: 50%;

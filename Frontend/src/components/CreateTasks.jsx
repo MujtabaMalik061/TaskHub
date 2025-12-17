@@ -239,7 +239,7 @@ const CreateTasks = ({ onClose, selectedProject, editData }) => {
                   </span>
                 ))
               ) : (
-                <p style={{ color: "rgb(55 65 81 / 38%)" }}>
+                <p style={{ color: "var(--primaryColor)" }}>
                   Assign to team members
                 </p>
               )}

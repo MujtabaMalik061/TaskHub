@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  color: var(--secondryColor);
 }
 
 .members-header-title {
@@ -20,8 +21,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: #2166fe;
-  color: white;
+  background: var(--textColor);
+  color: var(--secondryColor);
   border: none;
   padding: 7px 12px;
   border-radius: 8px;
@@ -32,30 +33,73 @@
   background: #1058f2;
 }
 
-.members-search {
+.members-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
   width: 400px;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--borderColor);
+  background-color: var(--cardColor);
+  color: var(--textColor);
+  outline: 0;
   border-radius: 6px;
   margin-bottom: 20px;
+  padding-right: 5px;
+}
+
+.members-search {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background-color: var(--cardColor);
+  color: var(--textColor);
+  outline: 0;
+}
+
+.members-search:focus .members-search-container {
+  border: 1px solid var(--borderColorFocus);
+}
+
+.members-search-clear {
+  font-size: 0px;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.members-search-clear:hover {
+  background-color: var(--borderColor);
 }
 
 .members-empty {
-  color: #888;
+  color: var(--primaryColor);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--borderColor);
+  background-color: var(--backGroundColor);
+  border-radius: 6px;
+  padding: 8px;
+  margin: 50px 0;
 }
 
 .members-list-header {
+  color: var(--secondryColor);
   padding: 14px 16px;
 }
 
 .members-list-header-count {
   font-size: 14px;
-  color: #555;
+  color: var(--primaryColor);
   margin-bottom: 10px;
 }
 
 .members-list {
-  border: 1px solid #eee;
+  border: 1px solid var(--borderColor);
+  background-color: var(--cardColor);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -64,7 +108,7 @@
   display: flex;
   align-items: center;
   padding: 14px 18px;
-  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid var(--borderColor);
 }
 
 .members-card:last-child {
@@ -74,7 +118,8 @@
 .members-avatar {
   width: 40px;
   height: 40px;
-  background: #e6e6e6;
+  background: var(--primaryColor);
+  color: var(--cardColor);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -98,11 +143,12 @@
   font-size: 16px;
   font-weight: 500;
   margin: 0;
+  color: var(--secondryColor);
 }
 
 .members-email {
   font-size: 14px;
-  color: #666;
+  color: var(--primaryColor);
 }
 
 .members-actions {
@@ -119,29 +165,30 @@
 }
 
 .members-role.owner {
-  background: #2166fe;
-  color: white;
+  background: var(--textColor);
+  color: var(--secondryColor);
 }
 
 .members-role.member {
-  background: #f0f0f0;
-  color: #444;
+  background: var(--secondryColor);
+  color: var(--cardColor);
 }
 
 .members-workspace {
   font-size: 12px;
-  background: #f8f8f8;
+  background: var(--secondryColor);
+  color: var(--cardColor);
   padding: 4px 10px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--borderColor);
 }
 
 .members-remove-btn {
   cursor: pointer;
-  background-color: #ff4d4d;
+  background-color: var(--dangerColor);
   font-size: 12px;
   padding: 4px 10px;
   border-radius: 12px;
   font-weight: 500;
-  color: white;
+  color: var(--secondryColor);
 }

@@ -10,12 +10,20 @@
 .dashboard-tab {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   gap: 20px;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgb(0 0 0 / 3%);
-  border: 1px solid #e0e0e0;
+  background-color: var(--cardColor);
+  box-shadow: 0px 0px 10px var(--boxShadowColor);
+  border-top: 4px solid var(--textColor);
+  transition: 0.3s;
+}
+
+.dashboard-tab:hover {
+  border-top: 6px solid var(--textColor);
+  transform: translateY(3px);
 }
 
 .dashboard-tab-uper-side {
@@ -26,9 +34,15 @@
 
 .dashboard-tab-uper-side > h3 {
   font-size: 15px;
+  color: var(--secondryColor);
 }
+
 .dashboard-tab-uper-side > span {
   font-size: 0px;
+}
+
+.dashboard-tab-uper-side > span > svg{
+  stroke: var(--primaryColor);
 }
 
 .dashboard-tab-bottom-side {
@@ -39,11 +53,12 @@
 
 .dashboard-tab-bottom-side > h2 {
   font-size: 14px;
+  color: var(--secondryColor);
 }
 
 .dashboard-tab-bottom-side > p {
   font-size: 12px;
-  color: #555;
+  color: var(--primaryColor);
 }
 
 .dashboard-body {
@@ -57,9 +72,10 @@
 .dashboard-body-left-side {
   width: 70%;
   height: 100%;
-  border: 1px solid #55555529;
+  background-color: var(--backGroundColor);
+  border: 1px solid var(--borderColor);
   border-radius: 10px;
-  box-shadow: 0px 0px 10px #00000017;
+  box-shadow: 0px 0px 10px var(--boxShadowColor);
 }
 
 .dashboard-body-right-side {
@@ -72,10 +88,11 @@
 
 .dashboard-projects-container {
   width: 100%;
-  border: 1px solid #55555529;
+  border: 1px solid var(--borderColor);
+  background-color: var(--backGroundColor);
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0px 0px 10px #00000017;
+  box-shadow: 0px 0px 10px var(--boxShadowColor);
   height: 100%;
   overflow: auto;
   min-height: 463px;
@@ -84,7 +101,7 @@
 .dashboard-projects-header {
   font-size: 14px;
   font-weight: 700;
-  color: oklch(0.55 0.25 262.87);
+  color: var(--textColor);
   margin-bottom: 15px;
   padding: 3px;
 }
@@ -101,8 +118,9 @@
   width: 100% !important;
   gap: 8px !important;
   padding: 8px !important;
-  border: 1px solid #55555529;
-  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.08);
+  background-color: var(--cardColor);
+  border: 1px solid var(--borderColor);
+  box-shadow: 0 0px 6px var(--boxShadowColor);
 }
 
 .dashboard-projects-inner-container > .project-card .project-header {
@@ -114,15 +132,18 @@
 
 .dashboard-projects-inner-container .project-title {
   font-size: 12px;
+  color: var(--secondryColor);
 }
 .dashboard-projects-inner-container .project-description {
   font-size: 10px;
+  color: var(--primaryColor);
 }
 .dashboard-projects-inner-container .project-status span {
   font-size: 10px;
 }
 .dashboard-projects-inner-container .project-footer {
   font-size: 11px;
+    color: var(--primaryColor);
 }
 .dashboard-projects-inner-container .project-calendar-icon {
   width: 12px;
@@ -144,7 +165,7 @@
 .chart-header-title {
   font-size: 25px;
   font-weight: 600;
-  color: #0050ff;
+  color: var(--textColor);
 }
 
 .tabs {
@@ -153,7 +174,7 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  border: 1.5px solid #135dff;
+  border: 1.5px solid var(--textColor);
   padding: 2px;
   border-radius: 8px;
   background-color: #135eff20;
@@ -161,7 +182,7 @@
 
 .tab {
   padding: 5px 6px;
-  color: black;
+  color: var(--primaryColor);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -170,7 +191,8 @@
 
 .active-tab {
   position: absolute;
-  background-color: #135dff;
+  background-color: var(--textColor);
+  color: var(--secondryColor);
   height: 80%;
   width: 30px;
   border-radius: 6px;
@@ -179,11 +201,8 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* .active-tab.all {
-} */
-
 .tab.active {
-  color: white !important;
+  color: var(--secondryColor) !important;
 }
 
 .active-tab.todo {

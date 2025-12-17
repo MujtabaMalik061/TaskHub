@@ -3,32 +3,36 @@
   margin: 20px auto;
   padding: 20px;
   font-family: "Poppins", sans-serif;
-  background: #fff;
+  background: var(--cardColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 3px;
 }
 
 .settings-section {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--borderColor);
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 25px;
-  background: #fafafa;
+  background: var(--backGroundColor);
 }
 
 .settings-section-title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 5px;
+  color: var(--secondryColor);
 }
 
 .settings-subheading {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 8px;
+  color: var(--secondryColor);
 }
 
 .settings-section-subtitle {
   font-size: 14px;
-  color: #666;
+  color: var(--primaryColor);
   margin-bottom: 15px;
 }
 
@@ -42,6 +46,7 @@
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 4px;
+  color: var(--secondryColor);
 }
 
 .settings-color-picker {
@@ -64,8 +69,8 @@
 
 .settings-save-btn {
   align-self: flex-start;
-  background: #2196f3;
-  color: white;
+  background: var(--textColor);
+  color: var(--secondryColor);
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 6px;
@@ -79,29 +84,29 @@
 }
 
 .settings-transfer-btn {
-  background: #e0e0e0;
-  color: #333;
+  background: var(--cardColor);
+  border: 1px solid var(--borderColor);
+  color: var(--secondryColor);
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 6px;
-  border: none;
   cursor: pointer;
 }
 
 .settings-transfer-btn:hover {
-  background: #bdbdbd;
+  background: var(--cardHoverColor);
 }
 
 .settings-danger-zone {
-  border: 1px solid #ffcccc;
+  border: 1px solid var(--borderColor);
   border-radius: 8px;
   padding: 20px;
-  background: #fff5f5;
+  background: var(--cardColor);
 }
 
 .settings-delete-btn {
-  background: rgb(255, 32, 32);
-  color: white;
+  background: var(--dangerColor);
+  color: var(--secondryColor);
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 6px;

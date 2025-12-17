@@ -157,7 +157,7 @@ const Chart = ({ tasksData }) => {
             data={percentageDataset}
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
           >
-            <CartesianGrid stroke="#f5f5f5" />
+            <CartesianGrid stroke="var(--cardColor)" />
             <XAxis dataKey="name" />
             <YAxis
               domain={[0, 100]}

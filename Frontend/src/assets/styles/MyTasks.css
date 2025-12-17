@@ -4,6 +4,8 @@
 }
 
 .task-header {
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 15px;
   width: 100%;
   align-items: center;
@@ -17,11 +19,12 @@
 .task-selected-project-info > h3 {
   font-size: 16px;
   font-weight: 600;
+  color: var(--primaryColor);
 }
 
 .task-selected-project-info > p {
   font-size: 14px;
-  color: #555;
+  color: var(--cardSubTitleColor);
 }
 
 .task-header-title {
@@ -29,36 +32,13 @@
   font-weight: 600;
 }
 
-.task-tabs {
-  display: flex;
-  background: #ecececad;
-  border-radius: 8px;
-  padding: 3px;
-}
-
-.task-tab {
-  padding: 5px 10px;
-  border-radius: 7px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.task-tab.active {
-  background-color: white !important;
-  box-shadow: 0px 0px 10px #00000008;
-}
-
-.task-tab:hover {
-  background: #f9f9f9;
-}
-
 .task-add-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #2166fe;
-  color: white;
+  background: var(--textColor);
+  color: var(--secondryColor);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -68,7 +48,7 @@
   display: flex;
   gap: 4px;
   font-size: 14px;
-  color: #555;
+  color: var(--textColor);
 }
 
 .task-status-summary > h4 {
@@ -77,10 +57,12 @@
 }
 
 .task-status-summary > span {
-  border: 1px solid #ccc;
+  border: 1px solid var(--borderColor);
+  background-color: var(--cardColor);
+  color: var(--secondryColor);
+  box-shadow: 0px 0px 5px var(--boxShadowColor);
   padding: 1px 8px;
   border-radius: 6px;
-  box-shadow: 0px 0px 5px #00000004;
 }
 
 .task-board {
@@ -103,7 +85,7 @@
 }
 
 .task-empty-container {
-  border: 1px dashed #ccc;
+  border: 1px dashed var(--primaryColor);
   border-radius: 8px;
   padding: 12px;
   min-height: 128px;
@@ -116,21 +98,22 @@
   font-weight: 600;
   margin-bottom: 4px;
   padding: 0px 5px;
+  color: var(--secondryColor);
 }
 
 .task-card {
-  background: white;
+  background: var(--cardColor);
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
   min-height: 125px;
   width: 100%;
   min-width: 315px;
-  border: 1px solid #eee;
+  border: 1px solid var(--borderColor);
   border-radius: 8px;
   padding: 20px 15px;
   margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px var(--boxShadowColor);
 }
 
 .task-card-bottom-side,
@@ -146,6 +129,7 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 4px;
+  color: var(--secondryColor);
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -154,7 +138,7 @@
 
 .task-card-disc {
   font-size: 13px;
-  color: #555;
+  color: var(--primaryColor);
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -178,7 +162,7 @@
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--secondryColor);
   white-space: nowrap;
 }
 
@@ -187,7 +171,7 @@
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: #777;
+  color: var(--cardSubTitleColor);
 }
 
 .task-card-due-date > svg {
@@ -197,12 +181,12 @@
 .task-card-assigned {
   font-size: 12px;
   font-weight: 400;
-  color: #777777;
+  color: var(--cardSubTitleColor);
 }
 
 .task-empty {
   text-align: center;
-  color: #aaa;
+  color: var(--primaryColor);
   font-size: 14px;
   padding: 20px 0;
 }

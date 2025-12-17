@@ -8,10 +8,11 @@ import {
   ListTodo,
 } from "lucide-react";
 import Loader from "../components/Loader";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Chart from "../components/Chart";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { workspaceData, selectedWorkSpace } = useOutletContext();
   const [loading, setLoading] = useState(true);
   const [tasksData, setTasksData] = useState([]);
@@ -89,7 +90,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="dashboard-tabs">
-        <div className="dashboard-tab">
+        <div className="dashboard-tab" onClick={() => navigate("/projects")}>
           <div className="dashboard-tab-uper-side">
             <h3>Total Projects</h3>
             <span>
@@ -101,7 +102,7 @@ const Dashboard = () => {
             <p>{inProgressProjects} in progress</p>
           </div>
         </div>
-        <div className="dashboard-tab">
+        <div className="dashboard-tab" onClick={() => navigate("/mytasks")}>
           <div className="dashboard-tab-uper-side">
             <h3>Total Tasks</h3>
             <span>
@@ -113,7 +114,10 @@ const Dashboard = () => {
             <p>{completedTasks} completed</p>
           </div>
         </div>
-        <div className="dashboard-tab">
+        <div
+          className="dashboard-tab"
+          onClick={() => navigate("/mytasks", { state: { activeTab: "todo" } })}
+        >
           <div className="dashboard-tab-uper-side">
             <h3>To Do</h3>
             <span>
@@ -125,7 +129,12 @@ const Dashboard = () => {
             <p>Tasks waiting to be started</p>
           </div>
         </div>
-        <div className="dashboard-tab">
+        <div
+          className="dashboard-tab"
+          onClick={() =>
+            navigate("/mytasks", { state: { activeTab: "inprogress" } })
+          }
+        >
           <div className="dashboard-tab-uper-side">
             <h3>In Progress</h3>
             <span>

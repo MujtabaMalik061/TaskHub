@@ -1,9 +1,9 @@
 .workspace-card {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--borderColor);
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
-  background: #fff;
+  background: var(--backGroundColor);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -38,11 +38,12 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
 .workspace-title {
   font-size: 18px;
   font-weight: 600;
+  color: var(--secondryColor);
 }
 
 .workspace-date {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--primaryColor);
 }
 
 .workspace-stats {
@@ -57,7 +58,7 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: #374151;
+  color: var(--primaryColor);
 }
 
 .icon {
@@ -68,5 +69,5 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
 .workspace-description {
   margin-top: 12px;
   font-size: 14px;
-  color: #4b5563;
+  color: var(--primaryColor);
 }

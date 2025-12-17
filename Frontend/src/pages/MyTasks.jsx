@@ -46,13 +46,11 @@ const useLocalStorageState = (key, defaultValue) => {
     try {
       if (state === undefined) return;
       localStorage.setItem(key, JSON.stringify(state));
-    } catch (e) {
-    }
+    } catch (e) {}
   }, [key, state]);
 
   return [state, setState];
 };
-
 
 const ProjectDropdown = ({ projects, selectedProject, onSelect }) => {
   return (
@@ -157,9 +155,7 @@ const TaskCard = ({
 
 const TaskColumn = ({ title, tasks, count, children }) => {
   return (
-    <div
-      className="task-column-outer-container"
-    >
+    <div className="task-column-outer-container">
       <div className="task-column-header">
         <h3>{title}</h3>
         <span>{count}</span>
@@ -433,6 +429,12 @@ const MyTasks = () => {
     document.title = "TaskHub | Tasks";
   }, []);
 
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location.state]);
+
   return (
     <div className="task-container">
       <div className="local-header flex align-item-center justify-content-space">
@@ -455,33 +457,33 @@ const MyTasks = () => {
       </div>
 
       <div className="task-header flex justify-content-space">
-        <div className="task-tabs">
+        <div className="tabs">
           <span
             onClick={() => setActiveTab("alltasks")}
-            className={`task-tab ${activeTab === "alltasks" ? "active" : ""}`}
+            className={`tab ${activeTab === "alltasks" ? "active" : ""}`}
           >
-            All Tasks
+            All
           </span>
           <span
             onClick={() => setActiveTab("todo")}
-            className={`task-tab ${activeTab === "todo" ? "active" : ""}`}
+            className={`tab ${activeTab === "todo" ? "active" : ""}`}
           >
-            To Do
+            Todo
           </span>
           <span
             onClick={() => setActiveTab("inprogress")}
-            className={`task-tab ${activeTab === "inprogress" ? "active" : ""}`}
+            className={`tab ${activeTab === "inprogress" ? "active" : ""}`}
           >
             In Progress
           </span>
           <span
             onClick={() => setActiveTab("done")}
-            className={`task-tab ${activeTab === "done" ? "active" : ""}`}
+            className={`tab ${activeTab === "done" ? "active" : ""}`}
           >
             Done
           </span>
+          <span className={`active-tab ${activeTab}`}></span>
         </div>
-
         {isWorkspaceOwner ? (
           <div
             onClick={() => {

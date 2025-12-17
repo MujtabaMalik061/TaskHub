@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: start;
   width: 100%;
-  background-color: white;
-  box-shadow: 0px 0px 10px #00000038;
+  background-color: var(--backGroundColor);
+  box-shadow: 0px 0px 10px var(--boxShadowColor);
   border-radius: 4px;
 }
 
@@ -24,9 +24,10 @@
 }
 
 .project-card {
-  background: #fff;
+  background: var(--cardColor);
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--boxShadowColor);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -38,7 +39,7 @@
 
 .project-card:hover {
   transform: translate(0px, -6px);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.104);
+  background-color: var(--cardHoverColor);
 }
 
 .project-header {
@@ -59,13 +60,14 @@
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
+  color: var(--secondryColor);
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .project-description {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--primaryColor);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -73,7 +75,7 @@
 
 .project-status span {
   position: relative;
-  background: #f3e8ff;
+  background: var(--secondryColor);
   color: #7c3aed;
   font-size: 12px;
   font-weight: 500;
@@ -96,27 +98,27 @@
 
 .project-progress-label {
   font-size: 13px;
-  color: #374151;
+  color: var(--cardSubTitleColor);
 }
 
 .project-progress-bar {
   flex: 1;
   height: 6px;
-  background: #e5e7eb;
+  background: var(--secondryColor);
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .project-progress-fill {
   height: 100%;
-  background: #2166fe;
+  background: var(--textColor);
   border-radius: 9999px;
   transition: width 0.3s ease;
 }
 
 .project-progress-percent {
   font-size: 12px;
-  color: #374151;
+  color: var(--secondryColor);
   font-weight: 500;
 }
 
@@ -125,7 +127,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--primaryColor);
 }
 
 .project-date {

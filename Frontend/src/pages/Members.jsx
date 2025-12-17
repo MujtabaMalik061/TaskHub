@@ -1,4 +1,4 @@
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import InviteMember from "../components/InviteMember";
@@ -15,10 +15,9 @@ const Members = () => {
   const [isInvite, setIsInvite] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
-   useEffect(() => {
-      document.title = "TaskHub | Members";
-    }, []);
+  useEffect(() => {
+    document.title = "TaskHub | Members";
+  }, []);
 
   const fetchWorkspace = async () => {
     try {
@@ -129,14 +128,24 @@ const Members = () => {
         )}
       </div>
 
-      <input
-        type="text"
-        placeholder="Search members..."
-        className="members-search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
+      <div className="members-search-container">
+        <input
+          type="text"
+          placeholder="Search members..."
+          className="members-search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <span
+          onClick={() => {
+            setSearch("");
+          }}
+          style={{ display: search?.length > 0 ? "block" : "none" }}
+          className="members-search-clear"
+        >
+          <X size={16} />
+        </span>
+      </div>
       {filteredMembers.length === 0 ? (
         <p className="members-empty">No members found.</p>
       ) : (

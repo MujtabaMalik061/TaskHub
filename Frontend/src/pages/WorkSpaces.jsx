@@ -87,7 +87,9 @@ const WorkSpaces = () => {
           <div
             style={{
               backgroundColor:
-                selectedWorkSpace === item._id ? "rgb(33 102 254 / 8%)" : "",
+                selectedWorkSpace === item._id ? "var(--cardColor)" : "",
+              borderColor:
+                selectedWorkSpace === item._id ? "var(--secondryColor)" : "",
             }}
             onClick={() => {
               setSelectedWorkSpace(item._id);

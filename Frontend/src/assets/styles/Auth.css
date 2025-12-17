@@ -44,7 +44,7 @@
 .form-label {
   font-size: 16px;
   font-weight: 400;
-  color: #374151;
+  color: var(--secondryColor);
   margin-bottom: 0.25rem;
   padding-left: 4px;
 }
@@ -57,7 +57,9 @@
 .form-selector {
   padding: 12px 5px;
   font-size: 16px;
-  border: 1px solid #d1d5db;
+  color: var(--secondryColor);
+  background-color: var(--cardColor);
+  border: 1px solid var(--borderColor);
   border-radius: 0.5rem;
   outline: none;
   cursor: pointer;
@@ -66,15 +68,18 @@
 .form-input {
   padding: 12px 5px;
   font-size: 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--borderColor);
+  background-color: var(--cardColor);
+  color: var(--primaryColor);
   border-radius: 0.5rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
 }
 
 .form-input:focus {
-  border-color: oklch(0.55 0.25 262.87);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  border-color: var(--textColor);
+  color: var(--secondryColor);
+  box-shadow: 0 0 0 3px var(--boxShadowColor);
 }
 
 .form-textarea {
@@ -82,15 +87,18 @@
   font-size: 16px;
   height: 80px;
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--borderColor);
+  background-color: var(--cardColor);
+  color: var(--primaryColor);
   border-radius: 0.5rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
   resize: none;
 }
 .form-textarea:focus {
-  border-color: oklch(0.55 0.25 262.87);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  border-color: var(--textColor);
+  color: var(--secondryColor);
+  box-shadow: 0 0 0 3px var(--boxShadowColor);
 }
 
 .signup-button {

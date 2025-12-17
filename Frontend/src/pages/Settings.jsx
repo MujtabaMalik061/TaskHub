@@ -194,7 +194,7 @@ const Settings = () => {
             onChange={(e) => setWorkSpaceName(e.target.value)}
           />
         </div>
-        <div>
+        <div style={{marginTop:"8px"}}>
           <div className="form-group">
             <label className="settings-label">Description</label>
             <textarea
@@ -260,7 +260,7 @@ const Settings = () => {
       </div>
 
       <div className="settings-danger-zone">
-        <h3 style={{ color: "red" }} className="settings-subheading">
+        <h3 style={{ color: "var(--dangerColor)" }} className="settings-subheading">
           Danger Zone
         </h3>
         <p className="settings-section-subtitle">
