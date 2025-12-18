@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
-import { CalendarDays, ChevronDownIcon, RotateCcw } from "lucide-react";
+import { CalendarDays, RotateCcw } from "lucide-react";
 import "../assets/styles/Project.css";
 
 const Achived = () => {
