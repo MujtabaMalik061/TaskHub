@@ -33,7 +33,7 @@ const ProjectInfo = () => {
   const fetchProject = async (projectId) => {
     try {
       setLoading(true);
-      const res = await API.post(`/project/${projectId}/getProjectById`);
+      const res = await API.post(`/api/project/${projectId}/getProjectById`);
       setProjectDetails(res.data);
     } catch (error) {
       toast.error("Failed to fetch project details");
@@ -47,12 +47,9 @@ const ProjectInfo = () => {
 
     try {
       setSendLoading(true);
-      await API.post(`/project/${projectDetails?._id}/comment`, {
+      await API.post(`/api/project/${projectDetails?._id}/comment`, {
         comment,
       });
-      // await API.post(`/project/${projectDetails?._id}/getProjectById`, {
-      //   comment,
-      // });
 
       toast.success("Comment added successfully");
       setComment("");

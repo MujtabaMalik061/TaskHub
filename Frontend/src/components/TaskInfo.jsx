@@ -31,7 +31,7 @@ const TaskInfo = () => {
   const fetchTask = async (taskId) => {
     try {
       setLoading(true);
-      const res = await API.get(`/tasks/taskById/${taskId}`);
+      const res = await API.get(`/api/tasks/taskById/${taskId}`);
       setTaskDetails(res.data.task);
     } catch (error) {
       toast.error("Failed to fetch task details");
@@ -44,7 +44,7 @@ const TaskInfo = () => {
     if (!comment.trim()) return;
     try {
       setSendLoading(true);
-      await API.post(`/tasks/${taskDetails?._id}/comment`, {
+      await API.post(`/api/tasks/${taskDetails?._id}/comment`, {
         comment,
       });
       toast.success("Comment added successfully");
