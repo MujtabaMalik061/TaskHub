@@ -1,4 +1,4 @@
-import { CalendarDays, CirclePlus } from "lucide-react";
+import { CalendarDays, CirclePlus, RotateCcw } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import CreateProject from "../components/CreateProject";
 import { useNavigate, useOutletContext } from "react-router";
@@ -6,10 +6,12 @@ import "../assets/styles/Project.css";
 import NoProject from "../components/NoProject";
 import { useAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
+import ProjectInfo from "../components/ProjectInfo";
 
 const Projects = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const [projectProgress, setProjectProgress] = useState([]);
   const [projects, setProjects] = useState([]);
   const { selectedWorkSpace } = useOutletContext();
   const [workspaceData, setWorkspaceData] = useState(null);
@@ -58,6 +60,26 @@ const Projects = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [contextMenu]);
 
+  useEffect(() => {
+    if (!selectedWorkSpace) return;
+    fetchData();
+  }, [selectedWorkSpace]);
+
+  useEffect(() => {
+    document.title = "TaskHub | Projects";
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      await Promise.all([fetchWorkspace(), fetchProjects()]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleDeleteProject = async (projectId) => {
     if (!window.confirm("Are you sure you want to delete this project?"))
       return;
@@ -77,10 +99,6 @@ const Projects = () => {
       setContextMenu({ ...contextMenu, visible: false });
     }
   };
-
-  useEffect(() => {
-    document.title = "TaskHub | Projects";
-  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -136,6 +154,9 @@ const Projects = () => {
       const data = await res.json();
       if (res.ok) {
         setProjects(data.projects || []);
+        data.projects.forEach((project) => {
+          fetchProjectProgress(project._id);
+        });
       } else {
         console.error("Failed to fetch projects:", data.message);
       }
@@ -144,22 +165,25 @@ const Projects = () => {
     }
   };
 
-  useEffect(() => {
-    if (!selectedWorkSpace) return;
+  const fetchProjectProgress = async (projectId) => {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/tasks/progress/${projectId}?userId=${currentUser._id}`
+      );
+      const data = await res.json();
 
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        await Promise.all([fetchWorkspace(), fetchProjects()]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
+      if (res.ok) {
+        setProjectProgress((prev) => {
+          const filtered = prev.filter((item) => item.projectId !== projectId);
+          return [...filtered, data];
+        });
       }
-    };
-
-    fetchData();
-  }, [selectedWorkSpace]);
+    } catch (error) {
+      console.error("Error fetching progress", error);
+    }
+  };
 
   const updateProjectStatus = async (projectId, newStatus, progress) => {
     try {
@@ -183,6 +207,10 @@ const Projects = () => {
     }
   };
 
+  const getProgressByProjectId = (projectId) => {
+    return projectProgress.find((p) => p.projectId === projectId);
+  };
+
   return loading ? (
     <Loader loading={true} style={{ height: "85vh", width: "100%" }} />
   ) : (
@@ -191,6 +219,18 @@ const Projects = () => {
         <>
           <div className="local-header flex align-item-center justify-content-space">
             <h3 className="local-header-title">Projects</h3>
+            <button
+              className="project-info-back-btn"
+              style={{ padding: "6px 8px 6px 9px" }}
+              onClick={() => {
+                fetchData();
+              }}
+            >
+              <span style={{ fontSize: "0px" }}>
+                <RotateCcw size={17} />
+              </span>
+              <span>Refresh</span>
+            </button>
             {workspaceData?.createdBy === currentUser?._id && (
               <button
                 onClick={() => {
@@ -207,112 +247,117 @@ const Projects = () => {
             className="flex wrap align-item-center justify-content-start"
             style={{ gap: "10px" }}
           >
-            {projects.map((project, index) => (
-              <div
-                onContextMenu={(e) => {
-                  if (workspaceData?.createdBy === currentUser?._id) {
-                    handleContextMenu(e, project);
-                  }
-                }}
-                onClick={() => {
-                  navigate("/mytasks", {
-                    state: { selectedProject: project._id },
-                  });
-                }}
-                key={index}
-                className="project-card"
-              >
-                <div className="project-header">
-                  <div className="project-info">
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-description">
-                      {project?.discription}
-                    </p>
+            {projects.map((project, index) => {
+              const progressData = getProgressByProjectId(project._id);
+
+              return (
+                <div
+                  key={index}
+                  className="project-card"
+                  onContextMenu={(e) => {
+                    if (workspaceData?.createdBy === currentUser?._id) {
+                      handleContextMenu(e, project);
+                    }
+                  }}
+                  onClick={() => navigate(`/project-info/${project?._id}`)}
+                >
+                  <div className="project-header">
+                    <div className="project-info">
+                      <h3 className="project-title">{project.title}</h3>
+                      <p className="project-description">
+                        {project?.discription}
+                      </p>
+                    </div>
+                    <div className="project-status">
+                      <span
+                        style={{
+                          cursor:
+                            workspaceData?.createdBy === currentUser?._id
+                              ? "pointer"
+                              : "",
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (workspaceData?.createdBy === currentUser?._id) {
+                            setIsUpdate(project._id);
+                          }
+                        }}
+                      >
+                        {project.status}
+                        {isUpdate === project._id && (
+                          <div className="project-status-update">
+                            <select
+                              className="form-selector"
+                              style={{ width: "100%" }}
+                              value={status || project.status}
+                              onChange={(e) => {
+                                const newStatus = e.target.value;
+                                const progress = calculateProgress(
+                                  project.startDate,
+                                  project.dueDate
+                                );
+                                setStatus(newStatus);
+                                updateProjectStatus(
+                                  project._id,
+                                  newStatus,
+                                  progress
+                                );
+                                setIsUpdate(null);
+                              }}
+                            >
+                              <option value="Plaining">Planning</option>
+                              <option value="InProgress">In Progress</option>
+                              <option value="OnHold">On Hold</option>
+                              <option value="Completed">Completed</option>
+                              <option value="Cancelled">Cancelled</option>
+                            </select>
+                          </div>
+                        )}
+                      </span>
+                    </div>
                   </div>
-                  <div className="project-status">
-                    <span
-                      style={{
-                        cursor:
-                          workspaceData?.createdBy === currentUser?._id
-                            ? "pointer"
-                            : "",
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (workspaceData?.createdBy === currentUser?._id) {
-                          setIsUpdate(project._id);
-                        }
-                      }}
-                    >
-                      {project.status}
-                      {isUpdate === project._id && (
-                        <div className="project-status-update">
-                          <select
-                            className="form-selector"
-                            style={{ width: "100%" }}
-                            value={status || project.status}
-                            onChange={(e) => {
-                              const newStatus = e.target.value;
-                              const progress = calculateProgress(
-                                project.startDate,
-                                project.dueDate
-                              );
-                              setStatus(newStatus);
-                              updateProjectStatus(
-                                project._id,
-                                newStatus,
-                                progress
-                              );
-                              setIsUpdate(null);
-                            }}
-                          >
-                            <option value="Plaining">Planning</option>
-                            <option value="InProgress">In Progress</option>
-                            <option value="OnHold">On Hold</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Cancelled">Cancelled</option>
-                          </select>
-                        </div>
-                      )}
+
+                  <div className="project-progress">
+                    <span className="project-progress-label">Progress</span>
+
+                    <div className="project-progress-bar">
+                      <div
+                        className="project-progress-fill"
+                        style={{
+                          width: `${progressData?.progress ?? 0}%`,
+                        }}
+                      />
+                    </div>
+
+                    <span className="project-progress-percent">
+                      {progressData?.progress ?? 0}%
+                    </span>
+                  </div>
+
+                  <div className="project-footer">
+                    <span className="project-tasks">
+                      {progressData
+                        ? `${progressData.completedTasks}/${progressData.totalTasks} Tasks`
+                        : `${String(project?.tasks?.length || 0).padStart(
+                            2,
+                            "0"
+                          )} Tasks`}
+                    </span>
+
+                    <span className="project-date">
+                      <CalendarDays className="project-calendar-icon" />
+                      {formatDate(project.dueDate)}
                     </span>
                   </div>
                 </div>
-
-                <div className="project-progress">
-                  <span className="project-progress-label">Progress</span>
-                  <div className="project-progress-bar">
-                    <div
-                      className="project-progress-fill"
-                      style={{
-                        width: `${calculateProgress(
-                          project.startDate,
-                          project.dueDate
-                        )}% `,
-                      }}
-                    ></div>
-                  </div>
-                  <span className="project-progress-percent">
-                    {calculateProgress(project.startDate, project.dueDate)}%
-                  </span>
-                </div>
-
-                <div className="project-footer">
-                  <span className="project-tasks">
-                    {String(project?.tasks?.length || 0).padStart(2, "0")} Tasks
-                  </span>
-                  <span className="project-date">
-                    <CalendarDays className="project-calendar-icon" />
-                    {formatDate(project.dueDate)}
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </>
       ) : workspaceData?.createdBy === currentUser?._id ? (
-        <NoProject />
+        <NoProject createbtn={true} />
       ) : (
-        <p className="empty-message">No project found.</p>
+        <NoProject />
       )}
       {(isCreateProjects === true || isCreateProjects?.mode === "edit") && (
         <CreateProject

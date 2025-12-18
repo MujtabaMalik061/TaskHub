@@ -1,0 +1,247 @@
+.project-info-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  padding: 24px;
+  background: var(--backGroundColor);
+  overflow: auto;
+  z-index: 10000;
+}
+
+.project-info-header {
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-info-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--textColor);
+  background-color: #135dff21;
+  padding: 7px 9px 7px 3px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.project-info-back-btn:hover {
+  gap: 8px;
+}
+
+.project-info-details {
+  background: var(--cardColor);
+  color: var(--secondryColor);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.project-info-title {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.project-info-description {
+  color: var(--primaryColor);
+  margin-bottom: 16px;
+}
+
+.project-info-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.project-info-meta span {
+  display: block;
+  font-size: 12px;
+  color: var(--primaryColor);
+}
+
+.project-info-status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.project-info-dates-container {
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px 3px 5px;
+}
+
+.project-info-date {
+  border: 1px solid var(--textColor);
+  background: #135dff26;
+  padding: 3px 4px;
+  border-radius: 3px;
+}
+
+.straight-line {
+  flex: 1;
+  width: 100%;
+  border-bottom: 2px dashed var(--textColor);
+  margin: 0px 7px;
+}
+
+.project-info-comments {
+  margin-top: 30px;
+  background: var(--cardColor);
+  color: var(--secondryColor);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.comments-header-container {
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.comments-header {
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.comments-header > button {
+  background-color: var(--textColor);
+  color: var(--secondryColor);
+  padding: 3px 8px 3px 9px;
+  gap: 3px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.comments-header > button:hover {
+  transform: scale(1.04);
+}
+
+.comments-write-container {
+  margin-top: 15px;
+}
+
+.comments-write-container > h3 {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 5px 7px;
+  color: var(--primaryColor);
+}
+.comments-write-container > button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0px 25px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--backGroundColor);
+  color: var(--secondryColor);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.comments-write-container > button:hover {
+  transform: scale(1.01);
+}
+
+.comments-group-date-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45px;
+}
+
+.comments-group-date-container > span {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  flex: 1;
+  width: 100%;
+  border-bottom: 2px solid var(--textColor);
+  z-index: 0;
+}
+
+.comments-group-date-container > div {
+  background-color: var(--cardColor);
+  border: 1px solid var(--textColor);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 13px;
+  z-index: 1;
+}
+
+.project-info-comment {
+  align-items: start;
+  gap: 12px;
+  margin-bottom: 16px;
+  background-color: var(--backGroundColor);
+  padding: 10px 10px 3px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.project-info-comment:hover {
+  transform: translateY(-2px);
+}
+
+.project-info-comment-body {
+  flex: 1;
+}
+
+.project-info-comment-header {
+  font-size: 14px;
+  width: 100%;
+}
+
+.project-info-comment-header-content {
+  font-size: 14px;
+  flex-direction: column;
+}
+
+.project-info-comment-header-content > strong {
+  font-size: 12px;
+}
+.project-info-comment-header-content > span {
+  font-size: 10px;
+  color: var(--primaryColor);
+}
+
+.project-info-comment-text {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.project-info-comment-date {
+  font-size: 11px;
+  color: var(--primaryColor);
+}
+
+.project-info-no-comments {
+  font-size: 14px;
+  color: var(--primaryColor);
+}
+
+@media (max-width: 425px) {
+  .project-info-comment-header-content > strong {
+    font-size: clamp(8px, 2vw, 12px);
+  }
+  .project-info-comment-header-content > span {
+    font-size: clamp(6px, 2vw, 10px);
+  }
+  .project-info-comment-date {
+    font-size: clamp(7px, 2vw, 11px);
+  }
+  .project-info-comment-text {
+    font-size: clamp(8px, 2vw, 14px);
+  }
+}

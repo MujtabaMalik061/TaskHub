@@ -212,3 +212,45 @@ export const getProjectMembers = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const getProjectById = async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.projectId)
+      .populate("members", "name email")
+      .populate("comments.userId", "name email");
+
+    res.status(200).json(project);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const addComment = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const { comment } = req.body;
+
+    if (!comment)
+      return res.status(400).json({ message: "Comment is required" });
+
+    const project = await Project.findByIdAndUpdate(
+      projectId,
+      {
+        $push: {
+          comments: {
+            userId: req.user.id,
+            comment,
+          },
+        },
+      },
+      { new: true }
+    ).populate("comments.userId", "name email");
+
+    res.status(200).json({
+      message: "Comment added successfully",
+      project,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

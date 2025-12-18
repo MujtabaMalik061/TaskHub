@@ -1,4 +1,4 @@
-import { CirclePlus, X } from "lucide-react";
+import { CirclePlus, RotateCcw, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import InviteMember from "../components/InviteMember";
@@ -44,30 +44,30 @@ const Members = () => {
   useEffect(() => {
     if (!selectedWorkSpace) return;
 
-    const fetchMembers = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          `${
-            import.meta.env.VITE_BACKEND_URL
-          }/api/workspaces/members/${selectedWorkSpace}`
-        );
-        const data = await res.json();
-
-        if (res.ok) {
-          setMembers(data.members || []);
-        } else {
-          console.error("Failed to fetch members:", data.message);
-        }
-      } catch (error) {
-        console.error("Error fetching members:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMembers();
   }, [selectedWorkSpace]);
+
+  const fetchMembers = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/workspaces/members/${selectedWorkSpace}`
+      );
+      const data = await res.json();
+
+      if (res.ok) {
+        setMembers(data.members || []);
+      } else {
+        console.error("Failed to fetch members:", data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching members:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredMembers = members
     .filter((member) =>
@@ -117,6 +117,18 @@ const Members = () => {
     <div className="members-container">
       <div className="members-header">
         <h3 className="members-header-title">Workspace Members</h3>
+        <button
+          className="project-info-back-btn"
+          style={{ padding: "6px 8px 6px 9px" }}
+          onClick={() => {
+            fetchMembers();
+          }}
+        >
+          <span style={{ fontSize: "0px" }}>
+            <RotateCcw size={17} />
+          </span>
+          <span>Refresh</span>
+        </button>
         {workspaceData?.createdBy === currentUser?._id && (
           <button
             onClick={() => setIsInvite(true)}

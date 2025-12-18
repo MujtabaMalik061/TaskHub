@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Calendar, ChevronDownIcon, CirclePlus } from "lucide-react";
-import { useOutletContext, useLocation } from "react-router";
+import { Calendar, ChevronDownIcon, CirclePlus, RotateCcw } from "lucide-react";
+import { useOutletContext, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 import "../assets/styles/MyTasks.css";
 import CreateTasks from "../components/CreateTasks";
@@ -54,7 +54,7 @@ const useLocalStorageState = (key, defaultValue) => {
 
 const ProjectDropdown = ({ projects, selectedProject, onSelect }) => {
   return (
-    <div className="workspace-selector-container">
+    <div className="workspace-selector-container workspace-secondry-selector-container">
       <div
         className="workspace-selector workspace-dropdown-right"
         style={{ width: "130px" }}
@@ -65,15 +65,19 @@ const ProjectDropdown = ({ projects, selectedProject, onSelect }) => {
         </span>
         <ChevronDownIcon size={12} className="selector-workspace-icon" />
         <div className="workspace-dropdown workspace-dropdown-right">
-          {projects.map((item) => (
-            <div
-              key={item._id}
-              className="workspace-dropdown-item"
-              onClick={() => onSelect(item._id)}
-            >
-              {item.title}
-            </div>
-          ))}
+          {projects?.length > 0 ? (
+            projects.map((item) => (
+              <div
+                key={item._id}
+                className="workspace-dropdown-item"
+                onClick={() => onSelect(item._id)}
+              >
+                {item.title}
+              </div>
+            ))
+          ) : (
+            <div className="workspace-dropdown-item">No Projects Found.</div>
+          )}
         </div>
       </div>
     </div>
@@ -82,15 +86,16 @@ const ProjectDropdown = ({ projects, selectedProject, onSelect }) => {
 
 const TaskCard = ({
   task,
-  onOpenDetail,
   onRightClick,
   onStatusClick,
   currentUserIsOwner,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       key={task._id}
-      onClick={() => onOpenDetail(task)}
+      onClick={() => navigate(`/task-info/${task._id}`)}
       onContextMenu={(e) => {
         if (currentUserIsOwner) {
           e.preventDefault();
@@ -220,8 +225,6 @@ const MyTasks = () => {
   const [activeTab, setActiveTab] = useState("alltasks");
   const [isCreateTask, setIsCreateTask] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isDetailModal, setIsDetailModal] = useState(false);
-  const [isDetail, setIsDetail] = useState(null);
   const [contextMenu, setContextMenu] = useState({
     x: null,
     y: null,
@@ -243,6 +246,7 @@ const MyTasks = () => {
   useEffect(() => {
     if (location.state?.selectedProject) {
       setSelectedProject(location.state.selectedProject);
+      window.history.replaceState({}, document.title);
     }
   }, [location.state?.selectedProject]);
 
@@ -414,11 +418,6 @@ const MyTasks = () => {
     setContextMenu({ x: null, y: null, task: null });
   }, [contextMenu, deleteTask]);
 
-  const openDetail = useCallback((task) => {
-    setIsDetail(task);
-    setIsDetailModal(true);
-  }, []);
-
   const onCloseCreate = useCallback(() => {
     setIsCreateTask(false);
     setEditTask(null);
@@ -439,7 +438,18 @@ const MyTasks = () => {
     <div className="task-container">
       <div className="local-header flex align-item-center justify-content-space">
         <h3 className="local-header-title">Tasks</h3>
-
+        <button
+          className="project-info-back-btn"
+          style={{ padding: "6px 8px 6px 9px" }}
+          onClick={() => {
+            fetchTasks();
+          }}
+        >
+          <span style={{ fontSize: "0px" }}>
+            <RotateCcw size={17} />
+          </span>
+          <span>Refresh</span>
+        </button>
         <ProjectDropdown
           projects={projects}
           selectedProject={selectedProject}
@@ -536,7 +546,6 @@ const MyTasks = () => {
                   <TaskCard
                     key={task._id}
                     task={task}
-                    onOpenDetail={openDetail}
                     onRightClick={handleRightClick}
                     onStatusClick={handleStatusClick}
                     currentUserIsOwner={isWorkspaceOwner}
@@ -561,7 +570,6 @@ const MyTasks = () => {
                   <TaskCard
                     key={task._id}
                     task={task}
-                    onOpenDetail={openDetail}
                     onRightClick={handleRightClick}
                     onStatusClick={handleStatusClick}
                     currentUserIsOwner={isWorkspaceOwner}
@@ -586,7 +594,6 @@ const MyTasks = () => {
                   <TaskCard
                     key={task._id}
                     task={task}
-                    onOpenDetail={openDetail}
                     onRightClick={handleRightClick}
                     onStatusClick={handleStatusClick}
                     currentUserIsOwner={isWorkspaceOwner}
@@ -616,16 +623,6 @@ const MyTasks = () => {
           }}
           selectedProject={selectedProject}
           editData={editTask}
-        />
-      )}
-
-      {isDetailModal && (
-        <TasksDetailModal
-          details={isDetail}
-          onClose={() => {
-            setIsDetailModal(false);
-            setIsDetail(null);
-          }}
         />
       )}
     </div>

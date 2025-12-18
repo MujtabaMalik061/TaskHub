@@ -27,6 +27,10 @@ body {
   background-color: var(--backGroundColor);
 }
 
+:disabled{
+  cursor: not-allowed !important;
+}
+
 .loaderWrapper {
   display: flex;
   align-items: center;
@@ -39,6 +43,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--secondryColor);
 }
 
 .empty-message-dashboard {
@@ -118,6 +123,8 @@ body {
 .local-header {
   padding: 30px 4px;
   color: var(--secondryColor);
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .local-header-title {
@@ -135,7 +142,7 @@ body {
   border: none;
   color: var(--secondryColor);
   background: var(--textColor);
-  padding: 0px 8px;
+  padding: 8px;
   border-radius: 6px;
   cursor: pointer;
 }

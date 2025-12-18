@@ -16,6 +16,8 @@ import AppLayout from "./layouts/AppLayout";
 import Projects from "./pages/Projects";
 import InvitePage from "./pages/InvitePage";
 import LandingPage from "./pages/LandingPage";
+import ProjectInfo from "./components/ProjectInfo";
+import TaskInfo from "./components/TaskInfo";
 
 const App = () => {
   const { currentUser } = useAuth();
@@ -39,14 +41,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/invite/:token"
-          element={
-            <PublicRoute>
-              <InvitePage />
-            </PublicRoute>
-          }
-        />
+        <Route path="/invite/:token" element={<InvitePage />} />
         <Route
           path="/workspaces"
           element={
@@ -84,6 +79,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Achived />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/project-info/:id"
+          element={
+            <ProtectedRoute>
+              <ProjectInfo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/task-info/:id"
+          element={
+            <ProtectedRoute>
+              <TaskInfo />
             </ProtectedRoute>
           }
         />

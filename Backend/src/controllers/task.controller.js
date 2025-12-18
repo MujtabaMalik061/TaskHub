@@ -1,6 +1,7 @@
 // src/controllers/project.controller.js
 import Task from "../models/task.model.js";
 import Project from "../models/project.model.js";
+import mongoose from "mongoose";
 
 export const createTask = async (req, res) => {
   try {
@@ -125,6 +126,7 @@ export const getTaskById = async (req, res) => {
 
     const task = await Task.findById(taskId)
       .populate("assignedTo", "name email")
+      .populate("comments.userId", "name email")
       .populate("project", "title description");
 
     if (!task) {
@@ -189,5 +191,64 @@ export const DeleteTask = async (req, res) => {
   } catch (error) {
     console.error("Error deleting task:", error);
     res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const getProjectProgressForUser = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const { userId } = req.query;
+
+    const tasks = await Task.find({
+      project: projectId,
+      assignedTo: userId,
+    });
+
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(
+      (task) => task.status === "done"
+    ).length;
+
+    const progress =
+      totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
+
+    res.status(200).json({
+      projectId,
+      totalTasks,
+      completedTasks,
+      progress,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to calculate progress" });
+  }
+};
+
+export const addComment = async (req, res) => {
+  try {
+    const { taskId } = req.params;
+    const { comment } = req.body;
+
+    if (!comment)
+      return res.status(400).json({ message: "Comment is required" });
+
+    const task = await Task.findByIdAndUpdate(
+      taskId,
+      {
+        $push: {
+          comments: {
+            userId: req.user.id,
+            comment,
+          },
+        },
+      },
+      { new: true }
+    ).populate("comments.userId", "name email");
+
+    res.status(200).json({
+      message: "Comment added successfully",
+      task,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

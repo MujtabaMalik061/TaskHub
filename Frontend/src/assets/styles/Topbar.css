@@ -125,3 +125,18 @@
   width: 36px;
   border-radius: 50%;
 }
+
+@media (max-width: 425px) {
+  .workspace-secondry-selector-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .workspace-secondry-selector-container
+    > .workspace-selector
+    > .workspace-dropdown {
+    width: 290px;
+  }
+}

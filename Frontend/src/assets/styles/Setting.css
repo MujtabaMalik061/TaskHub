@@ -101,7 +101,7 @@
   border: 1px solid var(--borderColor);
   border-radius: 8px;
   padding: 20px;
-  background: var(--cardColor);
+  background: var(--backGroundColor);
 }
 
 .settings-delete-btn {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { CirclePlus, Presentation, Users } from "lucide-react";
+import { CirclePlus, Presentation, RotateCcw, Users } from "lucide-react";
 import CreateWorkSpace from "../components/CreateWorkSpace";
 import "../assets/styles/WorkSpace.css";
 import Loader from "../components/Loader";
@@ -72,6 +72,18 @@ const WorkSpaces = () => {
     <div>
       <div className="local-header flex align-item-center justify-content-space">
         <h3 className="local-header-title">Workspaces</h3>
+        <button
+          className="project-info-back-btn"
+          style={{ padding: "6px 8px 6px 9px" }}
+          onClick={() => {
+            fetchWorkSpaces();
+          }}
+        >
+          <span style={{ fontSize: "0px" }}>
+            <RotateCcw size={17} />
+          </span>
+          <span>Refresh</span>
+        </button>
         <button
           onClick={() => {
             setIsCreateWorkSpace(true);

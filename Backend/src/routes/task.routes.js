@@ -8,7 +8,10 @@ import {
   getTaskById,
   updateTaskDetails,
   DeleteTask,
+  getProjectProgressForUser,
+  addComment,
 } from "../controllers/task.controller.js";
+import { verifyToken } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -26,5 +29,8 @@ router.put("/edit/:taskId/details", updateTaskDetails);
 
 router.delete("/:taskId/delete", DeleteTask);
 
+router.get("/progress/:projectId", getProjectProgressForUser);
+
+router.post("/:taskId/comment", verifyToken, addComment);
 
 export default router;
