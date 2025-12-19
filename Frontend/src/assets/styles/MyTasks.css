@@ -106,13 +106,14 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-  min-height: 125px;
+  height: 125px;
   width: 100%;
   min-width: 315px;
   border: 1px solid var(--borderColor);
   border-radius: 8px;
   padding: 20px 15px;
   margin-bottom: 10px;
+  cursor: pointer;
   box-shadow: 0 1px 3px var(--boxShadowColor);
 }
 
