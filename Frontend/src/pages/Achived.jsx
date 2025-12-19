@@ -123,7 +123,16 @@ const Achived = () => {
                     <span>Completed</span>
                   </div>
                 </div>
-
+                <div className="project-progress">
+                  <span className="project-progress-label">Progress</span>
+                  <div className="project-progress-bar">
+                    <div
+                      className="project-progress-fill"
+                      style={{ width: "100%" }}
+                    ></div>
+                  </div>
+                  <span className="project-progress-percent">100%</span>
+                </div>
                 <div className="project-footer">
                   <span className="project-tasks">
                     {progress.completedTasks}/{progress.totalTasks} Tasks
