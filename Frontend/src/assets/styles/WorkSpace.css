@@ -8,9 +8,9 @@
   transition: all 0.3s ease-in-out;
 }
 
-.workspace-card:hover{
-transform: translate(0px , -5px);
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
+.workspace-card:hover {
+  transform: translate(0px, -5px);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
 }
 
 .workspace-header {
@@ -70,4 +70,63 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.059);
   margin-top: 12px;
   font-size: 14px;
   color: var(--primaryColor);
+}
+
+.invite-page {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: var(--backGroundColor);
+}
+
+.invite-container {
+  color: var(--secondryColor);
+  background-color: var(--cardColor);
+  padding: 15px;
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  max-width: 95vw;
+  width: 400px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.invite-container > h2 {
+  margin-bottom: 8px;
+}
+
+.invite-detail-card {
+  color: var(--secondryColor);
+  background-color: var(--backGroundColor);
+  padding: 15px;
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.invite-actions {
+  width: 100%;
+  gap: 20px;
+}
+
+.invite-actions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin: 0px;
 }

@@ -166,7 +166,7 @@ export const sendWorkspaceInvite = async (req, res) => {
           <a href="${inviteLink}" 
              style="background:#4f46e5;color:white;padding:10px 15px;
              text-decoration:none;border-radius:5px;">
-            Accept Invite
+            View Invite Details
           </a>
         </p>
       `,
@@ -337,5 +337,35 @@ export const deleteWorkspace = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Error deleting workspace", error: error.message });
+  }
+};
+
+export const getInviteDetails = async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const invite = await Invite.findOne({ token })
+      .populate("workspace")
+      .populate("invitedUser", "firstName lastName email")
+      .populate("inviter", "firstName lastName email");
+
+    if (!invite) {
+      return res.status(404).json({ message: "Invite not found" });
+    }
+
+    if (invite.status !== "pending") {
+      return res
+        .status(400)
+        .json({ message: "Invite already used or expired" });
+    }
+
+    if (invite.expiresAt < new Date()) {
+      return res.status(400).json({ message: "Invite expired" });
+    }
+
+    res.json({ invite });
+  } catch (error) {
+    console.error("Error fetching invite details:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };

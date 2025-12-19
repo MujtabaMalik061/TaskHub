@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/Topbar.css";
 import { useAuth } from "../contexts/AuthContext";
-import { Bell, ChevronDown, X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import CreateWorkSpace from "./CreateWorkSpace";
 import Loader from "./Loader";
 import { toast } from "sonner";
@@ -13,6 +13,12 @@ const Topbar = ({ selectedWorkSpace, setSelectedWorkSpace }) => {
   const [workSpaces, setWorkSpaces] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!selectedWorkSpace) {
+      toast.error("Please select a workSpace.");
+    }
+  }, []);
 
   useEffect(() => {
     if (!currentUser?._id) return;
@@ -186,7 +192,7 @@ const Topbar = ({ selectedWorkSpace, setSelectedWorkSpace }) => {
                     fontWeight: "600",
                     background: "transparent",
                     border: "1px solid var(--borderColor)",
-                    color:"var(--secondryColor)",
+                    color: "var(--secondryColor)",
                     padding: "3px 5px",
                     cursor: "pointer",
                     borderRadius: "4px",

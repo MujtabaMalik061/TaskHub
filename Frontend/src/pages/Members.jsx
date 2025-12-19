@@ -1,12 +1,14 @@
-import { CirclePlus, RotateCcw, X } from "lucide-react";
+import { CirclePlus, LogOut, RotateCcw, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import InviteMember from "../components/InviteMember";
 import Loader from "../components/Loader";
 import "../assets/styles/Members.css";
 import { useAuth } from "../contexts/AuthContext";
+import { toast } from "sonner";
 
 const Members = () => {
+  const navigate =useNavigate();
   const { currentUser } = useAuth();
   const { selectedWorkSpace } = useOutletContext();
   const [members, setMembers] = useState([]);
@@ -99,11 +101,42 @@ const Members = () => {
 
       if (res.ok) {
         setMembers((prev) => prev.filter((m) => m._id !== memberId));
+        toast.success("User Removed Successfully")
       } else {
         console.error("Failed to remove member:", data.message);
+        toast.error("Failed to remove member.");
       }
     } catch (error) {
       console.error("Error removing member:", error);
+    }
+  };
+  const handleExit = async (memberId) => {
+    if (!selectedWorkSpace) return;
+
+    const confirmRemove = window.confirm(
+      "Are you sure you want to exit from this workspace?"
+    );
+    if (!confirmRemove) return;
+
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/workspaces/members/${selectedWorkSpace}/${memberId}`,
+        { method: "DELETE" }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+       navigate("/members");
+        toast.success("Workspace Exit Successfully");
+      } else {
+        console.error("Failed to remove member:", data.message);
+        toast.error("Failed to exit workspace.");
+      }
+    } catch (error) {
+      console.error("Error exit workspace:", error);
     }
   };
 
@@ -129,13 +162,21 @@ const Members = () => {
           </span>
           <span>Refresh</span>
         </button>
-        {workspaceData?.createdBy === currentUser?._id && (
+        {workspaceData?.createdBy === currentUser?._id ? (
           <button
             onClick={() => setIsInvite(true)}
             className="members-header-btn"
           >
             <CirclePlus size={18} />
             Invite
+          </button>
+        ) : (
+          <button
+            onClick={() => handleExit(currentUser._id)}
+            className="members-header-btn"
+          >
+            <LogOut size={18} />
+            Exit
           </button>
         )}
       </div>

@@ -13,6 +13,7 @@ import {
   updateWorkspace,
   transferWorkspaceOwnership,
   deleteWorkspace,
+  getInviteDetails,
 } from "../controllers/workSpace.controller.js";
 
 const router = express.Router();
@@ -32,6 +33,8 @@ router.get("/invite/decline/:token", declineWorkspaceInvite);
 router.put("/workspace/:workspaceId", updateWorkspace);
 router.put("/workspace/:workspaceId/transfer", transferWorkspaceOwnership);
 router.delete("/:workspaceId/delete", deleteWorkspace);
+router.get("/invite/:token", getInviteDetails);
+
 
 
 export default router;
